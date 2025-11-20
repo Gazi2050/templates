@@ -1,5 +1,5 @@
 {
-  "name": "odin",
+  "name": "pkg-template",
   "version": "1.0.0",
   "description": "",
   "main": "dist/odin.js",
