@@ -1,0 +1,179 @@
+---
+title: Select
+description: A select component for Tailwind CSS with beautiful shadcn/ui styling. Use it to pick one option from a native dropdown, like a category, status, or timezone.
+---
+
+The select picks one option from a list using the browser's native dropdown. Pair it with a [field](/components/field) for a label and description; for a searchable list with custom option rendering, reach for the [combobox](/components/combobox).
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="select-demo-fruit">Fruit</label>
+  <select class="select" id="select-demo-fruit">
+    <option value="">Select a fruit</option>
+    <optgroup label="Fruits">
+      <option value="apple">Apple</option>
+      <option value="banana">Banana</option>
+      <option value="blueberry">Blueberry</option>
+      <option value="grapes">Grapes</option>
+      <option value="pineapple">Pineapple</option>
+    </optgroup>
+  </select>
+  <p class="field-description">Choose your favorite fruit.</p>
+</div>
+```
+
+## Usage
+
+Add the `select` class to a `<select>` element. Options and groups are the native `<option>` and `<optgroup>` elements.
+
+| Class    | Description                    |
+| -------- | ------------------------------- |
+| `select` | Add to a `<select>` element     |
+| `select-sm` | Add to `select` for a compact field |
+
+```html
+<select class="select">
+  <option value="">Select an option</option>
+  <option value="one">Option one</option>
+  <option value="two">Option two</option>
+</select>
+```
+
+## Examples
+
+### Basic
+
+A bare select with only a placeholder option.
+
+```html preview preset=form
+<select class="select">
+  <option value="">Select an option</option>
+  <option value="one">Option one</option>
+  <option value="two">Option two</option>
+  <option value="three">Option three</option>
+</select>
+```
+
+### Groups
+
+Organize options into categories with `<optgroup>`.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="select-department">Department</label>
+  <select class="select" id="select-department">
+    <option value="">Select department</option>
+    <optgroup label="Engineering">
+      <option value="frontend">Frontend</option>
+      <option value="backend">Backend</option>
+      <option value="devops">DevOps</option>
+    </optgroup>
+    <optgroup label="Sales">
+      <option value="sales-rep">Sales Rep</option>
+      <option value="account-manager">Account Manager</option>
+      <option value="sales-director">Sales Director</option>
+    </optgroup>
+    <optgroup label="Operations">
+      <option value="support">Customer Support</option>
+      <option value="product-manager">Product Manager</option>
+      <option value="ops-manager">Operations Manager</option>
+    </optgroup>
+  </select>
+  <p class="field-description">Select your department or area of work.</p>
+</div>
+```
+
+### Disabled
+
+Add `disabled` and the select mutes itself and blocks interaction.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="select-disabled">Fruit</label>
+  <select class="select" id="select-disabled" disabled>
+    <option value="">Select a fruit</option>
+    <option value="apple">Apple</option>
+    <option value="banana">Banana</option>
+    <option value="blueberry">Blueberry</option>
+  </select>
+  <p class="field-description">This field is currently disabled.</p>
+</div>
+```
+
+### Invalid
+
+Set `aria-invalid` on the select for the error state.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="select-invalid">Fruit</label>
+  <select class="select" id="select-invalid" aria-invalid="true">
+    <option value="">Select a fruit</option>
+    <option value="apple">Apple</option>
+    <option value="banana">Banana</option>
+    <option value="blueberry">Blueberry</option>
+  </select>
+  <p class="field-description">This field contains validation errors.</p>
+</div>
+```
+
+### Inline
+
+Put the label beside the select with a horizontal field, like a rows per page control.
+
+```html preview preset=form
+<div class="field field-horizontal w-fit">
+  <label class="label" for="select-rows-per-page">Rows per page</label>
+  <select class="select w-20" id="select-rows-per-page">
+    <option>10</option>
+    <option selected>25</option>
+    <option>50</option>
+    <option>100</option>
+  </select>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="select-rtl-demo" dir="rtl" class="field">
+  <label class="label" for="select-rtl-fruit" data-i18n="label">فاكهة</label>
+  <select class="select" id="select-rtl-fruit">
+    <option value="" data-i18n="selectFruit">اختر فاكهة</option>
+    <optgroup label="الفواكه" data-i18n-optgroup="fruits">
+      <option value="apple" data-i18n="apple">تفاح</option>
+      <option value="banana" data-i18n="banana">موز</option>
+      <option value="blueberry" data-i18n="blueberry">توت أزرق</option>
+      <option value="grapes" data-i18n="grapes">عنب</option>
+      <option value="pineapple" data-i18n="pineapple">أناناس</option>
+    </optgroup>
+    <optgroup label="الخضروات" data-i18n-optgroup="vegetables">
+      <option value="carrot" data-i18n="carrot">جزر</option>
+      <option value="broccoli" data-i18n="broccoli">بروكلي</option>
+      <option value="spinach" data-i18n="spinach">سبانخ</option>
+    </optgroup>
+  </select>
+  <p class="field-description" data-i18n="description">اختر فاكهتك المفضلة.</p>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", label: "فاكهة", description: "اختر فاكهتك المفضلة.", selectFruit: "اختر فاكهة", fruits: "الفواكه", apple: "تفاح", banana: "موز", blueberry: "توت أزرق", grapes: "عنب", pineapple: "أناناس", vegetables: "الخضروات", carrot: "جزر", broccoli: "بروكلي", spinach: "سبانخ" },
+    he: { dir: "rtl", label: "פרי", description: "בחר את הפרי האהוב עליך.", selectFruit: "בחר פרי", fruits: "פירות", apple: "תפוח", banana: "בננה", blueberry: "אוכמניה", grapes: "ענבים", pineapple: "אננס", vegetables: "ירקות", carrot: "גזר", broccoli: "ברוקולי", spinach: "תרד" },
+    en: { dir: "ltr", label: "Fruit", description: "Choose your favorite fruit.", selectFruit: "Select a fruit", fruits: "Fruits", apple: "Apple", banana: "Banana", blueberry: "Blueberry", grapes: "Grapes", pineapple: "Pineapple", vegetables: "Vegetables", carrot: "Carrot", broccoli: "Broccoli", spinach: "Spinach" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("select-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+    document.querySelectorAll("[data-i18n-optgroup]").forEach((el) => {
+      el.label = t[el.dataset.i18nOptgroup];
+    });
+  });
+</script>
+```

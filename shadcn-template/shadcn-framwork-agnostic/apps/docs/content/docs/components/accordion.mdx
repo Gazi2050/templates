@@ -1,0 +1,563 @@
+---
+title: Accordion
+description: An accordion component for Tailwind CSS with beautiful shadcn/ui styling. Use it to stack sections that expand one at a time, like the questions of an FAQ.
+---
+
+The accordion stacks sections that expand and collapse in place, opening one at a time unless told otherwise, like an FAQ. For a single independent section, use a [collapsible](/components/collapsible).
+
+```html preview preset=accordion
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-shipping" class="accordion-trigger" aria-expanded="true">
+        What are your shipping options?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-shipping">
+      <div class="accordion-content">
+        We offer standard (5-7 days), express (2-3 days), and overnight
+        shipping. Free shipping on international orders.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-returns" class="accordion-trigger">
+        What is your return policy?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-returns">
+      <div class="accordion-content">
+        Returns accepted within 30 days. Items must be unused and in original
+        packaging. Refunds processed within 5-7 business days.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-support" class="accordion-trigger">
+        How can I contact customer support?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-support">
+      <div class="accordion-content">
+        Reach us via email, live chat, or phone. We respond within 24 hours
+        during business days.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `accordion` class to the wrapper and compose each section from an item, a trigger, and a panel; the panel points at its trigger with `data-sp-toggle`. Opening a section closes the others.
+
+| Class               | Description                                              |
+| ------------------- | -------------------------------------------------------- |
+| `accordion`         | Add to the wrapper; carries the `data-sp-*` options      |
+| `accordion-item`    | Add to each section; draws the divider to the next one   |
+| `accordion-trigger` | Add to the `<button>`, wrapped in a heading              |
+| `accordion-panel`   | Add to the collapsing element; `expanded` starts it open |
+| `accordion-content` | Add to the inner wrapper holding the section's content   |
+
+```html
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button id="section-1" class="accordion-trigger">Section title</button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#section-1">
+      <div class="accordion-content">Section content.</div>
+    </div>
+  </div>
+</div>
+```
+
+You can include an icon in the trigger, most commonly a chevron as its last child, which is sized and styled for you. The trigger's `aria-expanded` follows the state, so `in-aria-expanded:rotate-180` rotates it while the section is open:
+
+```html
+<button id="section-1" class="accordion-trigger">
+  Section title
+  <svg class="in-aria-expanded:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+```
+
+## Examples
+
+### Multiple
+
+Add `data-sp-multiple` and sections open independently.
+
+```html preview preset=accordion
+<div class="accordion" data-sp-multiple>
+  <div class="accordion-item">
+    <h3>
+      <button
+        id="acc-notifications"
+        class="accordion-trigger"
+        aria-expanded="true"
+      >
+        Notification Settings
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-notifications">
+      <div class="accordion-content">
+        Choose which updates you want to receive and how: email, push, or in-app
+        notifications.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-privacy" class="accordion-trigger">
+        Privacy & Security
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-privacy">
+      <div class="accordion-content">
+        Control who can see your profile and activity, and manage two-factor
+        authentication.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-billing-m" class="accordion-trigger">
+        Billing & Subscription
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-billing-m">
+      <div class="accordion-content">
+        Update your payment method, view invoices, and manage your subscription
+        plan.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Initially open
+
+Author the `expanded` class on a panel to start it open, and mirror `aria-expanded="true"` onto its trigger so state-driven styling, like the rotated chevron, paints correctly before JavaScript loads.
+
+```html preview preset=accordion
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-open-trial" class="accordion-trigger">
+        Is there a free trial?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-open-trial">
+      <div class="accordion-content">
+        Yes, every plan starts with a 14-day free trial. No credit card
+        required.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-open-refund" class="accordion-trigger" aria-expanded="true">
+        Can I get a refund?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-open-refund">
+      <div class="accordion-content">
+        Contact us within 30 days of purchase and we refund you in full, no
+        questions asked.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Icons
+
+The chevron is plain markup, so swap it for another icon, move it in front of the title, or leave it out. Nothing moves on its own: `in-aria-expanded:rotate-180` on the svg is what turns it while the section is open.
+
+```html preview preset=accordion
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-icon-chevron" class="accordion-trigger" aria-expanded="true">
+        Chevron
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-icon-chevron">
+      <div class="accordion-content">
+        The classic indicator: a chevron as the trigger's last child, rotating
+        as the section opens.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-icon-plus" class="accordion-trigger">
+        Plus and minus
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="M5 12h14"/><path d="M12 5v14" class="transition-opacity duration-200 in-aria-expanded:opacity-0"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-icon-plus">
+      <div class="accordion-content">
+        A plus whose vertical line fades away as the icon turns, leaving a
+        minus while the section is open.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-icon-lead-chevron" class="accordion-trigger">
+        <span class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+          Leading chevron
+        </span>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-icon-lead-chevron">
+      <div class="accordion-content">
+        The same chevron wrapped in a flex span before the title instead of at
+        the end.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-icon-lead-plus" class="accordion-trigger">
+        <span class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 in-aria-expanded:rotate-180"><path d="M5 12h14"/><path d="M12 5v14" class="transition-opacity duration-200 in-aria-expanded:opacity-0"/></svg>
+          Leading plus and minus
+        </span>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-icon-lead-plus">
+      <div class="accordion-content">
+        The plus and minus morph works in the leading position too.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-icon-none" class="accordion-trigger">No icon</button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-icon-none">
+      <div class="accordion-content">
+        No indicator at all; the trigger is just text.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Disabled
+
+Add `disabled` to a trigger to lock its section.
+
+```html preview preset=accordion
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-history" class="accordion-trigger">
+        Can I access my account history?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-history">
+      <div class="accordion-content">
+        Yes, you can view your complete account history including all
+        transactions, plan changes, and support tickets in the Account History
+        section of your dashboard.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-premium" class="accordion-trigger" disabled>
+        Premium feature information
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-premium">
+      <div class="accordion-content">
+        This section contains information about premium features. Upgrade your
+        plan to access this content.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-email" class="accordion-trigger">
+        How do I update my email address?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-email">
+      <div class="accordion-content">
+        You can update your email address in your account settings. You'll
+        receive a verification email at your new address to confirm the change.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Borders
+
+Wrap the accordion in a border and inset the items.
+
+```html preview preset=accordion
+<div class="accordion rounded-lg border">
+  <div class="accordion-item px-4">
+    <h3>
+      <button id="acc-billing-b" class="accordion-trigger" aria-expanded="true">
+        How does billing work?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-billing-b">
+      <div class="accordion-content">
+        We bill monthly or annually, with a discount for annual plans. Your card
+        is charged at the start of each cycle.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item px-4">
+    <h3>
+      <button id="acc-security-b" class="accordion-trigger">
+        Is my data secure?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-security-b">
+      <div class="accordion-content">
+        All data is encrypted in transit and at rest, and we run independent
+        security audits every year.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item px-4">
+    <h3>
+      <button id="acc-integration-b" class="accordion-trigger">
+        What integrations do you support?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-integration-b">
+      <div class="accordion-content">
+        We integrate with the major productivity, analytics, and communication
+        tools your team already uses.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Card
+
+An accordion slots into a [card](/components/card) for a framed FAQ.
+
+```html preview preset=accordion
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Subscription &amp; Billing</h3>
+    <p class="card-description">
+      Common questions about your account, plans, payments and cancellations.
+    </p>
+  </div>
+  <div class="card-content">
+    <div class="accordion">
+      <div class="accordion-item">
+        <h3>
+          <button id="acc-plans" class="accordion-trigger" aria-expanded="true">
+            What subscription plans do you offer?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </h3>
+        <div class="accordion-panel expanded" data-sp-toggle="#acc-plans">
+          <div class="accordion-content">
+            We offer Free, Pro, and Enterprise plans. Each tier adds more seats,
+            storage, and support options.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h3>
+          <button id="acc-billing-c" class="accordion-trigger">
+            How does billing work?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </h3>
+        <div class="accordion-panel" data-sp-toggle="#acc-billing-c">
+          <div class="accordion-content">
+            We bill monthly or annually, with a discount for annual plans. Your
+            card is charged at the start of each cycle.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h3>
+          <button id="acc-cancel" class="accordion-trigger">
+            How do I cancel my subscription?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </h3>
+        <div class="accordion-panel" data-sp-toggle="#acc-cancel">
+          <div class="accordion-content">
+            Cancel anytime from your billing settings. Your plan stays active
+            until the end of the paid period.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=accordion dir=rtl
+<div id="accordion-rtl-demo" class="accordion" dir="rtl">
+  <div class="accordion-item">
+    <h3>
+      <button
+        id="accordion-rtl-password"
+        class="accordion-trigger"
+        aria-expanded="true"
+      >
+        <span data-i18n="q1">كيف يمكنني إعادة تعيين كلمة المرور؟</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#accordion-rtl-password">
+      <div class="accordion-content" data-i18n="a1">
+        انقر على «نسيت كلمة المرور» في صفحة تسجيل الدخول وسنرسل لك رابطًا
+        لإعادة تعيين كلمة المرور.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="accordion-rtl-plan" class="accordion-trigger">
+        <span data-i18n="q2">هل يمكنني تغيير خطة الاشتراك الخاصة بي؟</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#accordion-rtl-plan">
+      <div class="accordion-content" data-i18n="a2">
+        نعم، يمكنك ترقية أو تخفيض خطتك في أي وقت من إعدادات حسابك.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="accordion-rtl-payment" class="accordion-trigger">
+        <span data-i18n="q3">ما هي طرق الدفع التي تقبلونها؟</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#accordion-rtl-payment">
+      <div class="accordion-content" data-i18n="a3">
+        نقبل جميع بطاقات الائتمان الرئيسية و PayPal والتحويلات المصرفية.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: {
+      dir: "rtl",
+      q1: "كيف يمكنني إعادة تعيين كلمة المرور؟",
+      a1: "انقر على «نسيت كلمة المرور» في صفحة تسجيل الدخول وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+      q2: "هل يمكنني تغيير خطة الاشتراك الخاصة بي؟",
+      a2: "نعم، يمكنك ترقية أو تخفيض خطتك في أي وقت من إعدادات حسابك.",
+      q3: "ما هي طرق الدفع التي تقبلونها؟",
+      a3: "نقبل جميع بطاقات الائتمان الرئيسية و PayPal والتحويلات المصرفية.",
+    },
+    he: {
+      dir: "rtl",
+      q1: "איך אני מאפס את הסיסמה שלי?",
+      a1: "לחץ על 'שכחתי סיסמה' בעמוד ההתחברות ונשלח לך קישור לאיפוס הסיסמה.",
+      q2: "האם אני יכול לשנות את תוכנית המנוי שלי?",
+      a2: "כן, אתה יכול לשדרג או להוריד את התוכנית שלך בכל עת מהגדרות החשבון.",
+      q3: "אילו אמצעי תשלום אתם מקבלים?",
+      a3: "אנו מקבלים כרטיסי אשראי, PayPal והעברות בנקאיות.",
+    },
+    en: {
+      dir: "ltr",
+      q1: "How do I reset my password?",
+      a1: "Click 'Forgot Password' on the login page and we'll send you a link to reset your password.",
+      q2: "Can I change my subscription plan?",
+      a2: "Yes, you can upgrade or downgrade your plan at any time from your account settings.",
+      q3: "What payment methods do you accept?",
+      a3: "We accept all major credit cards, PayPal, and bank transfers.",
+    },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("accordion-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
+## Options
+
+### Accordion
+
+Set each option with its own `data-sp-*` attribute on the `accordion` element.
+
+| Attribute          | Values  | Default |
+| ------------------ | ------- | ------- |
+| `data-sp-multiple` | Boolean | `false` |
+
+Each `accordion-panel` points at its trigger with its own `data-sp-toggle` attribute.
+
+## JavaScript
+
+### Events
+
+The panels are collapsibles, so their lifecycle events fire on each panel and bubble; `before*` events are cancelable.
+
+| Event               | When                           |
+| ------------------- | ------------------------------ |
+| `sp-beforeexpand`   | Before expanding (cancelable)  |
+| `sp-expand`         | Expanding                      |
+| `sp-expanded`       | Expanded and settled           |
+| `sp-beforecollapse` | Before collapsing (cancelable) |
+| `sp-collapse`       | Collapsing                     |
+| `sp-collapsed`      | Collapsed and settled          |
+
+```js
+accordion.addEventListener("sp-expand", (e) => {
+  console.log("opening", e.target.id);
+});
+```
+
+### Methods
+
+Each panel is a collapsible; drive one with `sp.collapsible(panel)`:
+
+| Method       | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `expand()`   | Expand the panel (closing siblings unless multiple) |
+| `collapse()` | Collapse the panel                                  |
+| `toggle()`   | Expand if collapsed, else collapse                  |
+
+```js
+sp.collapsible(document.querySelector("#section-1-panel")).expand();
+```

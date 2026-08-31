@@ -1,0 +1,42 @@
+@utility accordion {
+  @layer l1.l2 {
+    @apply w-full;
+  }
+}
+
+@utility accordion-item {
+  @layer l1.l2 {
+    @apply [&:not(:last-child)]:border-b;
+  }
+}
+
+@utility accordion-trigger {
+  @layer l1.l2 {
+    @apply flex w-full flex-1 items-start justify-between gap-4 rounded-md py-4 text-start text-sm font-medium transition-all outline-none hover:underline;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+
+    & > svg:last-child {
+      @apply pointer-events-none ms-auto size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200;
+    }
+  }
+}
+
+@utility accordion-panel {
+  @layer l1.l2 {
+    /* Same collapse mechanism as .collapsible; see collapsible.css. */
+    @apply invisible h-0 overflow-hidden;
+    @apply [&.expanding]:visible [&.expanding]:animate-collapse-down;
+    @apply [&.collapsing]:visible [&.collapsing]:animate-collapse-up;
+
+    &.expanded {
+      @apply visible h-auto;
+    }
+  }
+}
+
+@utility accordion-content {
+  @layer l1.l2 {
+    @apply pt-0 pb-4 text-sm;
+  }
+}

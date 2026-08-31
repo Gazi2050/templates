@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 45% 97%;
+    --foreground: 235 36% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 235 36% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 235 36% 14%;
+    --primary: 41 76% 80%;
+    --primary-foreground: 235 36% 14%;
+    --secondary: 235 15% 28%;
+    --secondary-foreground: 220 45% 97%;
+    --muted: 225 56% 95%;
+    --muted-foreground: 228 16% 43%;
+    --accent: 41 57% 44%;
+    --accent-foreground: 220 45% 97%;
+    --destructive: 0 95% 71%;
+    --destructive-foreground: 220 45% 97%;
+    --border: 227 33% 89%;
+    --input: 227 33% 89%;
+    --ring: 41 76% 80%;
+    --radius: 0.875rem;
+    --chart-1: 217 99% 65%;
+    --chart-2: 145 60% 49%;
+    --chart-3: 44 100% 53%;
+    --chart-4: 24 95% 53%;
+    --chart-5: 281 70% 67%;
+
+    --color-bg-canvas: 247 248 252;
+    --color-bg-surface: 255 255 255;
+    --color-bg-elevated: 238 240 251;
+    --color-bg-muted: 227 232 255;
+    --color-bg-inverse: 23 26 49;
+    --color-text-primary: 23 26 49;
+    --color-text-secondary: 61 61 82;
+    --color-text-muted: 91 99 126;
+    --color-text-inverse: 247 248 252;
+    --color-text-accent: 143 115 82;
+    --color-border-subtle: 237 239 246;
+    --color-border-default: 219 223 234;
+    --color-border-strong: 168 175 198;
+    --color-border-accent: 220 190 138;
+    --color-action-primary-bg: 244 217 166;
+    --color-action-primary-text: 23 26 49;
+    --color-action-primary-border: 244 217 166;
+    --color-action-secondary-bg: 237 239 246;
+    --color-action-secondary-text: 42 42 62;
+    --color-action-secondary-border: 219 223 234;
+    --color-action-inverted-bg: 23 26 49;
+    --color-action-inverted-text: 247 248 252;
+    --color-action-inverted-border: 23 26 49;
+    --color-feedback-success: 52 199 89;
+    --color-feedback-warning: 255 159 10;
+    --color-feedback-danger: 255 107 107;
+    --color-feedback-info: 77 124 254;
+  }
+
+  .dark:root {
+    --background: 230 40% 10%;
+    --foreground: 220 45% 97%;
+    --card: 236 36% 14%;
+    --card-foreground: 220 45% 97%;
+    --popover: 236 36% 14%;
+    --popover-foreground: 220 45% 97%;
+    --primary: 41 76% 80%;
+    --primary-foreground: 235 36% 14%;
+    --secondary: 232 24% 22%;
+    --secondary-foreground: 220 45% 97%;
+    --muted: 233 24% 22%;
+    --muted-foreground: 227 17% 72%;
+    --accent: 41 76% 80%;
+    --accent-foreground: 235 36% 14%;
+    --destructive: 5 100% 61%;
+    --destructive-foreground: 220 45% 97%;
+    --border: 227 24% 27%;
+    --input: 227 24% 27%;
+    --ring: 41 76% 80%;
+    --chart-1: 211 100% 52%;
+    --chart-2: 141 62% 50%;
+    --chart-3: 50 100% 52%;
+    --chart-4: 16 100% 56%;
+    --chart-5: 282 100% 75%;
+
+    --color-bg-canvas: 15 18 35;
+    --color-bg-surface: 23 26 49;
+    --color-bg-elevated: 32 36 59;
+    --color-bg-muted: 42 46 68;
+    --color-bg-inverse: 247 248 252;
+    --color-text-primary: 247 248 252;
+    --color-text-secondary: 211 219 253;
+    --color-text-muted: 168 175 198;
+    --color-text-inverse: 23 26 49;
+    --color-text-accent: 244 217 166;
+    --color-border-subtle: 42 46 68;
+    --color-border-default: 59 66 96;
+    --color-border-strong: 91 99 126;
+    --color-border-accent: 244 217 166;
+    --color-action-primary-bg: 244 217 166;
+    --color-action-primary-text: 23 26 49;
+    --color-action-primary-border: 244 217 166;
+    --color-action-secondary-bg: 42 46 68;
+    --color-action-secondary-text: 247 248 252;
+    --color-action-secondary-border: 59 66 96;
+    --color-action-inverted-bg: 247 248 252;
+    --color-action-inverted-text: 23 26 49;
+    --color-action-inverted-border: 247 248 252;
+    --color-feedback-success: 48 209 88;
+    --color-feedback-warning: 255 214 10;
+    --color-feedback-danger: 255 69 58;
+    --color-feedback-info: 10 132 255;
+  }
+}

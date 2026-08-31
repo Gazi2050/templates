@@ -1,0 +1,151 @@
+---
+title: Badge
+description: A badge component for Tailwind CSS with beautiful shadcn/ui styling. Use it to mark content with a small status or label, like "New", a count, or a category.
+---
+
+The badge marks content with a small status or label, like "New", a count, or a category.
+
+```html preview
+<span class="badge">Badge</span>
+<span class="badge badge-secondary">Secondary</span>
+<span class="badge badge-destructive">Destructive</span>
+<span class="badge badge-outline">Outline</span>
+```
+
+## Usage
+
+Add the `badge` class to a `<span>` or `<a>` element.
+
+| Class               | Description                                               |
+| ------------------- | --------------------------------------------------------- |
+| `badge`             | Add to the element; primary style by default              |
+| `badge-secondary`   | Add to `badge` for the muted secondary style              |
+| `badge-destructive` | Add to `badge` for the soft destructive style             |
+| `badge-outline`     | Add to `badge` for a bordered, transparent style          |
+| `badge-ghost`       | Add to `badge` for a borderless style that tints on hover |
+| `badge-link`        | Add to `badge` for a link-styled badge                    |
+
+```html
+<span class="badge">Badge</span>
+```
+
+## Examples
+
+### Variants
+
+All badge variants side by side.
+
+```html preview
+<span class="badge">Default</span>
+<span class="badge badge-secondary">Secondary</span>
+<span class="badge badge-destructive">Destructive</span>
+<span class="badge badge-outline">Outline</span>
+<span class="badge badge-ghost">Ghost</span>
+<span class="badge badge-link">Link</span>
+```
+
+### With icon
+
+Lead or trail the text with an icon, and add `icon-start` or `icon-end` to it for the correct spacing.
+
+```html preview
+<span class="badge badge-secondary">
+  <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+  Verified
+</span>
+<span class="badge badge-outline">
+  Bookmark
+  <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>
+</span>
+```
+
+### With spinner
+
+A spinning icon marks an in-progress state.
+
+```html preview
+<span class="badge badge-destructive">
+  <svg class="icon-start animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+  Deleting
+</span>
+<span class="badge badge-secondary">
+  Generating
+  <svg class="icon-end animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+</span>
+```
+
+### Link
+
+Render the badge on an `<a>` and it picks up hover styling.
+
+```html preview
+<a href="#link" class="badge">
+  Open Link
+  <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+</a>
+```
+
+### Custom colors
+
+The badge is one element, so utility classes restyle it directly. Make sure the text still carries the meaning, not the color alone.
+
+```html preview
+<span
+  class="badge bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300"
+>
+  Blue
+</span>
+<span
+  class="badge bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300"
+>
+  Green
+</span>
+<span class="badge bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300">
+  Sky
+</span>
+<span
+  class="badge bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300"
+>
+  Purple
+</span>
+<span class="badge bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300">
+  Red
+</span>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview dir=rtl
+<div id="badge-rtl-demo" class="flex flex-wrap items-center gap-2" dir="rtl">
+  <span class="badge" data-i18n="badge">شارة</span>
+  <span class="badge badge-secondary" data-i18n="secondary">ثانوي</span>
+  <span class="badge badge-destructive" data-i18n="destructive">مدمر</span>
+  <span class="badge badge-outline" data-i18n="outline">مخطط</span>
+  <span class="badge badge-secondary">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+    <span data-i18n="verified">متحقق</span>
+  </span>
+  <span class="badge badge-outline">
+    <span data-i18n="bookmark">إشارة مرجعية</span>
+    <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>
+  </span>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", badge: "شارة", secondary: "ثانوي", destructive: "مدمر", outline: "مخطط", verified: "متحقق", bookmark: "إشارة مرجعية" },
+    he: { dir: "rtl", badge: "תג", secondary: "משני", destructive: "הרסני", outline: "קווי מתאר", verified: "מאומת", bookmark: "סימנייה" },
+    en: { dir: "ltr", badge: "Badge", secondary: "Secondary", destructive: "Destructive", outline: "Outline", verified: "Verified", bookmark: "Bookmark" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("badge-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```

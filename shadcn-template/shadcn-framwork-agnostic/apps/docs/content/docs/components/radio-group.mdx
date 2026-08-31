@@ -1,0 +1,225 @@
+---
+title: Radio Group
+description: A radio group component for Tailwind CSS with beautiful shadcn/ui styling. Use it to pick exactly one option from a set, like a plan or a shipping method.
+---
+
+The radio group picks exactly one option from a set, like a plan or a shipping method. For on/off settings, reach for the [checkbox](/components/checkbox) or [switch](/components/switch).
+
+```html preview preset=form
+<div class="field-group gap-3" role="radiogroup" aria-label="Density">
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="r1" name="density" value="default" />
+    <label class="label" for="r1">Default</label>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="r2" name="density" value="comfortable" checked />
+    <label class="label" for="r2">Comfortable</label>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="r3" name="density" value="compact" />
+    <label class="label" for="r3">Compact</label>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `radio` class to each `<input type="radio">` and give the set a shared `name`. Lay each option out with its label in a horizontal [field](/components/field), and give the group an accessible name: a `field-set` with a legend, or `role="radiogroup"` with an `aria-label`.
+
+| Class   | Description                          |
+| ------- | ------------------------------------- |
+| `radio` | Add to each `<input type="radio">`    |
+
+```html
+<div class="field field-horizontal">
+  <input type="radio" class="radio" id="option-1" name="my-group" />
+  <label class="label" for="option-1">Option one</label>
+</div>
+```
+
+## Examples
+
+### Description
+
+Give options supporting text with `field-content`.
+
+```html preview preset=form
+<div class="field-group gap-3" role="radiogroup" aria-label="Density">
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="desc-r1" name="desc-density" value="default" />
+    <div class="field-content">
+      <label class="label" for="desc-r1">Default</label>
+      <p class="field-description">Standard spacing for most use cases.</p>
+    </div>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="desc-r2" name="desc-density" value="comfortable" checked />
+    <div class="field-content">
+      <label class="label" for="desc-r2">Comfortable</label>
+      <p class="field-description">More space between elements.</p>
+    </div>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="desc-r3" name="desc-density" value="compact" />
+    <div class="field-content">
+      <label class="label" for="desc-r3">Compact</label>
+      <p class="field-description">Minimal spacing for dense layouts.</p>
+    </div>
+  </div>
+</div>
+```
+
+### Choice card
+
+Wrap each option in a [label](/components/label) and the whole card becomes clickable, tinting itself while checked.
+
+```html preview preset=form
+<div class="field-group gap-3" role="radiogroup" aria-label="Plan">
+  <label class="label" for="plus-plan">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <span class="field-title">Plus</span>
+        <p class="field-description">For individuals and small teams.</p>
+      </div>
+      <input type="radio" class="radio" id="plus-plan" name="plan" value="plus" checked />
+    </div>
+  </label>
+  <label class="label" for="pro-plan">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <span class="field-title">Pro</span>
+        <p class="field-description">For growing businesses.</p>
+      </div>
+      <input type="radio" class="radio" id="pro-plan" name="plan" value="pro" />
+    </div>
+  </label>
+  <label class="label" for="enterprise-plan">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <span class="field-title">Enterprise</span>
+        <p class="field-description">For large teams and enterprises.</p>
+      </div>
+      <input type="radio" class="radio" id="enterprise-plan" name="plan" value="enterprise" />
+    </div>
+  </label>
+</div>
+```
+
+### Fieldset
+
+Wrap the group in a [field set](/components/field) with a legend so it is announced together.
+
+```html preview preset=form
+<fieldset class="field-set">
+  <legend class="field-legend field-legend-label">Subscription Plan</legend>
+  <p class="field-description">Yearly and lifetime plans offer significant savings.</p>
+  <div class="field-group gap-3">
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-monthly" name="sub-plan" checked />
+      <label class="label font-normal" for="plan-monthly">Monthly ($9.99/month)</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-yearly" name="sub-plan" />
+      <label class="label font-normal" for="plan-yearly">Yearly ($99.99/year)</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-lifetime" name="sub-plan" />
+      <label class="label font-normal" for="plan-lifetime">Lifetime ($299.99)</label>
+    </div>
+  </div>
+</fieldset>
+```
+
+### Disabled
+
+Add `disabled` to an option and its label dims with it.
+
+```html preview preset=form
+<div class="field-group gap-3" role="radiogroup" aria-label="Options">
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="disabled-1" name="disabled-group" disabled />
+    <label class="label font-normal" for="disabled-1">Disabled</label>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="disabled-2" name="disabled-group" checked />
+    <label class="label font-normal" for="disabled-2">Option 2</label>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="disabled-3" name="disabled-group" />
+    <label class="label font-normal" for="disabled-3">Option 3</label>
+  </div>
+</div>
+```
+
+### Invalid
+
+Set `aria-invalid` on the radios for the error state.
+
+```html preview preset=form
+<fieldset class="field-set">
+  <legend class="field-legend field-legend-label">Notification Preferences</legend>
+  <p class="field-description">Choose how you want to receive notifications.</p>
+  <div class="field-group gap-3">
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="invalid-email" name="invalid-notifications" checked aria-invalid="true" />
+      <label class="label font-normal" for="invalid-email">Email only</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="invalid-sms" name="invalid-notifications" aria-invalid="true" />
+      <label class="label font-normal" for="invalid-sms">SMS only</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="invalid-both" name="invalid-notifications" aria-invalid="true" />
+      <label class="label font-normal" for="invalid-both">Both Email &amp; SMS</label>
+    </div>
+  </div>
+</fieldset>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="radio-group-rtl-demo" dir="rtl">
+  <div class="field-group gap-3" role="radiogroup" aria-label="Density">
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="radio-group-rtl-1" name="radio-group-rtl-density" value="default" />
+      <div class="field-content">
+        <label class="label" for="radio-group-rtl-1" data-i18n="default">افتراضي</label>
+        <p class="field-description" data-i18n="defaultDescription">تباعد قياسي لمعظم حالات الاستخدام.</p>
+      </div>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="radio-group-rtl-2" name="radio-group-rtl-density" value="comfortable" checked />
+      <div class="field-content">
+        <label class="label" for="radio-group-rtl-2" data-i18n="comfortable">مريح</label>
+        <p class="field-description" data-i18n="comfortableDescription">مساحة أكبر بين العناصر.</p>
+      </div>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="radio-group-rtl-3" name="radio-group-rtl-density" value="compact" />
+      <div class="field-content">
+        <label class="label" for="radio-group-rtl-3" data-i18n="compact">مضغوط</label>
+        <p class="field-description" data-i18n="compactDescription">تباعد أدنى للتخطيطات الكثيفة.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", default: "افتراضي", defaultDescription: "تباعد قياسي لمعظم حالات الاستخدام.", comfortable: "مريح", comfortableDescription: "مساحة أكبر بين العناصر.", compact: "مضغوط", compactDescription: "تباعد أدنى للتخطيطات الكثيفة." },
+    he: { dir: "rtl", default: "ברירת מחדל", defaultDescription: "ריווח סטנדרטי לרוב מקרי השימוש.", comfortable: "נוח", comfortableDescription: "יותר מקום בין האלמנטים.", compact: "קומפקטי", compactDescription: "ריווח מינימלי לפריסות צפופות." },
+    en: { dir: "ltr", default: "Default", defaultDescription: "Standard spacing for most use cases.", comfortable: "Comfortable", comfortableDescription: "More space between elements.", compact: "Compact", compactDescription: "Minimal spacing for dense layouts." },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("radio-group-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```

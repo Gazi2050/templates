@@ -1,0 +1,129 @@
+---
+title: Separator
+description: A separator component for Tailwind CSS with beautiful shadcn/ui styling. Use it to divide content, horizontally between sections or vertically between inline items.
+---
+
+The separator draws a thin line that visually divides content, horizontally between sections or vertically between inline items.
+
+```html preview preset=form
+<div class="flex flex-col gap-4 text-sm">
+  <div class="flex flex-col gap-1.5">
+    <div class="leading-none font-medium">Starting Point UI</div>
+    <div class="text-muted-foreground">
+      The foundation for your design system
+    </div>
+  </div>
+  <div class="separator"></div>
+  <div>
+    A set of beautifully designed components that you can customize, extend, and
+    build on.
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `separator` class to an empty element; it renders horizontally unless you add `separator-vertical`. A vertical separator stretches to its container's height, so give the row a height or let the tallest sibling define it.
+
+| Class                  | Description                                     |
+| ---------------------- | ----------------------------------------------- |
+| `separator`            | Add to an empty element; horizontal by default  |
+| `separator-horizontal` | Add to `separator` to force the horizontal axis |
+| `separator-vertical`   | Add to `separator` for a vertical divider       |
+
+```html
+<div class="separator"></div>
+```
+
+## Examples
+
+### Vertical
+
+Divide inline items with `separator-vertical`.
+
+```html preview
+<div class="flex h-5 items-center gap-4 text-sm">
+  <div>Blog</div>
+  <div class="separator separator-vertical"></div>
+  <div>Docs</div>
+  <div class="separator separator-vertical"></div>
+  <div>Source</div>
+</div>
+```
+
+### Menu
+
+Vertical separators divide richer inline groups too; hide trailing ones responsively along with their content.
+
+```html preview
+<div class="flex items-center gap-2 text-sm md:gap-4">
+  <div class="flex flex-col gap-1">
+    <span class="font-medium">Settings</span>
+    <span class="text-xs text-muted-foreground">Manage preferences</span>
+  </div>
+  <div class="separator separator-vertical"></div>
+  <div class="flex flex-col gap-1">
+    <span class="font-medium">Account</span>
+    <span class="text-xs text-muted-foreground">Profile &amp; security</span>
+  </div>
+  <div class="separator separator-vertical hidden md:block"></div>
+  <div class="hidden flex-col gap-1 md:flex">
+    <span class="font-medium">Help</span>
+    <span class="text-xs text-muted-foreground">Support &amp; docs</span>
+  </div>
+</div>
+```
+
+### List
+
+Separate rows of a definition list.
+
+```html preview preset=form
+<div class="flex flex-col gap-2 text-sm">
+  <dl class="flex items-center justify-between">
+    <dt>Item 1</dt>
+    <dd class="text-muted-foreground">Value 1</dd>
+  </dl>
+  <div class="separator"></div>
+  <dl class="flex items-center justify-between">
+    <dt>Item 2</dt>
+    <dd class="text-muted-foreground">Value 2</dd>
+  </dl>
+  <div class="separator"></div>
+  <dl class="flex items-center justify-between">
+    <dt>Item 3</dt>
+    <dd class="text-muted-foreground">Value 3</dd>
+  </dl>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="separator-rtl-demo" dir="rtl" class="flex max-w-sm flex-col gap-4 text-sm">
+  <div class="flex flex-col gap-1.5">
+    <div class="leading-none font-medium">Starting Point UI</div>
+    <div class="text-muted-foreground" data-i18n="subtitle">الأساس لنظام التصميم الخاص بك</div>
+  </div>
+  <div class="separator"></div>
+  <div data-i18n="description">مجموعة من المكونات المصممة بشكل جميل يمكنك تخصيصها وتوسيعها والبناء عليها.</div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", subtitle: "الأساس لنظام التصميم الخاص بك", description: "مجموعة من المكونات المصممة بشكل جميل يمكنك تخصيصها وتوسيعها والبناء عليها." },
+    he: { dir: "rtl", subtitle: "הבסיס למערכת העיצוב שלך", description: "סט של רכיבים מעוצבים בצורה יפה שאתה יכול להתאים אישית, להרחיב ולבנות עליהם." },
+    en: { dir: "ltr", subtitle: "The foundation for your design system", description: "A set of beautifully designed components that you can customize, extend, and build on." },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("separator-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```

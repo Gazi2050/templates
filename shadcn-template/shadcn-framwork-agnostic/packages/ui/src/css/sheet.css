@@ -1,0 +1,151 @@
+@utility sheet {
+  @layer l1.l2 {
+    /* Full-viewport transparent container; the visible panel is
+       .sheet-panel, positioned by the side modifiers on this element.
+       The dim is a plain background instead of ::backdrop, so authored
+       .shown paints identically before JS and after showModal(). */
+    @apply fixed inset-0 z-999 m-0 h-full max-h-none w-full max-w-none overflow-clip border-none bg-black/10 p-0 text-foreground supports-backdrop-filter:backdrop-blur-xs;
+
+    /* Display comes from [open] (runtime) or authored .shown (pre-JS). */
+    &[open],
+    &.shown {
+      @apply block;
+    }
+
+    &::backdrop {
+      @apply hidden;
+    }
+
+    /* The root fades the dim; it also drives the lifecycle timing, which
+       waits for animations on the sheet element itself. */
+    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:duration-200 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:duration-200 [&.hide]:[animation-fill-mode:forwards];
+
+    @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom,.sheet-start,.sheet-end))]:sheet-end;
+  }
+}
+
+@utility sheet-left {
+  @layer l1 {
+    & > .sheet-panel {
+      @apply inset-y-0 left-0 h-full w-[calc(100%-2.5rem)] max-w-sm border-r;
+    }
+    &.show > .sheet-panel {
+      @apply slide-in-from-left-10;
+    }
+    &.hide > .sheet-panel {
+      @apply slide-out-to-left-10;
+    }
+  }
+}
+
+@utility sheet-right {
+  @layer l1 {
+    & > .sheet-panel {
+      @apply inset-y-0 right-0 h-full w-[calc(100%-2.5rem)] max-w-sm border-l;
+    }
+    &.show > .sheet-panel {
+      @apply slide-in-from-right-10;
+    }
+    &.hide > .sheet-panel {
+      @apply slide-out-to-right-10;
+    }
+  }
+}
+
+@utility sheet-start {
+  @layer l1 {
+    & > .sheet-panel {
+      @apply inset-y-0 start-0 h-full w-[calc(100%-2.5rem)] max-w-sm border-e;
+    }
+    &.show > .sheet-panel {
+      @apply slide-in-from-start-10;
+    }
+    &.hide > .sheet-panel {
+      @apply slide-out-to-start-10;
+    }
+  }
+}
+
+@utility sheet-end {
+  @layer l1 {
+    & > .sheet-panel {
+      @apply inset-y-0 end-0 h-full w-[calc(100%-2.5rem)] max-w-sm border-s;
+    }
+    &.show > .sheet-panel {
+      @apply slide-in-from-end-10;
+    }
+    &.hide > .sheet-panel {
+      @apply slide-out-to-end-10;
+    }
+  }
+}
+
+@utility sheet-top {
+  @layer l1 {
+    & > .sheet-panel {
+      @apply inset-x-0 top-0 h-auto w-full border-b;
+    }
+    &.show > .sheet-panel {
+      @apply slide-in-from-top-10;
+    }
+    &.hide > .sheet-panel {
+      @apply slide-out-to-top-10;
+    }
+  }
+}
+
+@utility sheet-bottom {
+  @layer l1 {
+    & > .sheet-panel {
+      @apply inset-x-0 bottom-0 h-auto w-full border-t;
+    }
+    &.show > .sheet-panel {
+      @apply slide-in-from-bottom-10;
+    }
+    &.hide > .sheet-panel {
+      @apply slide-out-to-bottom-10;
+    }
+  }
+}
+
+@utility sheet-panel {
+  @layer l1.l2 {
+    @apply absolute flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg;
+
+    @apply in-[.sheet.show]:animate-in in-[.sheet.show]:fade-in-0 in-[.sheet.show]:duration-200 in-[.sheet.show]:[animation-fill-mode:forwards];
+    @apply in-[.sheet.hide]:animate-out in-[.sheet.hide]:fade-out-0 in-[.sheet.hide]:duration-200 in-[.sheet.hide]:[animation-fill-mode:forwards];
+  }
+}
+
+@utility sheet-content {
+  @layer l1.l2 {
+    /* Fills the space between header and footer and scrolls on its own, so
+       the footer stays pinned to the bottom edge. */
+    @apply flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4;
+  }
+}
+
+@utility sheet-header {
+  @layer l1.l2 {
+    @apply flex flex-col gap-1.5 p-4;
+  }
+}
+
+@utility sheet-footer {
+  @layer l1.l2 {
+    @apply mt-auto flex flex-col gap-2 p-4;
+  }
+}
+
+@utility sheet-title {
+  @layer l1.l2 {
+    @apply text-base font-medium text-foreground;
+  }
+}
+
+@utility sheet-description {
+  @layer l1.l2 {
+    @apply text-sm text-muted-foreground;
+  }
+}

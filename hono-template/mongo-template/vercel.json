@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/src/server.ts"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/api",
+      "permanent": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/api/index"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/api",
+      "permanent": false
+    }
+  ]
+}

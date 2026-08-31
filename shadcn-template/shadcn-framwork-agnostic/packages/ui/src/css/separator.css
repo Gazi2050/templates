@@ -1,0 +1,20 @@
+/* Starting Point UI Separator Styles */
+
+@utility separator {
+  @layer l1.l2 {
+    @apply bg-border shrink-0;
+    @apply [&:where(&:not(.separator-horizontal,.separator-vertical))]:separator-horizontal;
+  }
+}
+
+@utility separator-horizontal {
+  @layer l1 {
+    @apply h-px w-full;
+  }
+}
+
+@utility separator-vertical {
+  @layer l1 {
+    @apply w-px self-stretch;
+  }
+}

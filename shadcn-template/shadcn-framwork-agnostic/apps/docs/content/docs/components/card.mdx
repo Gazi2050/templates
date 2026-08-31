@@ -1,0 +1,345 @@
+---
+title: Card
+description: A card component for Tailwind CSS with beautiful shadcn/ui styling. Use it to group related content on one surface, like a login form or a stat.
+---
+
+The card groups related content on one surface, like a login form, a stat, or a settings section.
+
+```html preview preset=form
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Login to your account</h3>
+    <p class="card-description">
+      Enter your email below to login to your account
+    </p>
+    <div class="card-action">
+      <button class="btn btn-link">Sign Up</button>
+    </div>
+  </div>
+  <div class="card-content">
+    <form class="flex flex-col gap-6">
+      <div class="field">
+        <label class="label" for="card-demo-email">Email</label>
+        <input
+          class="input"
+          id="card-demo-email"
+          type="email"
+          placeholder="m@example.com"
+          required
+        />
+      </div>
+      <div class="field">
+        <div class="flex w-full items-center">
+          <label class="label" for="card-demo-password">Password</label>
+          <a
+            href="#"
+            class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+          >
+            Forgot your password?
+          </a>
+        </div>
+        <input class="input" id="card-demo-password" type="password" required />
+      </div>
+    </form>
+  </div>
+  <div class="card-footer flex-col gap-2">
+    <button type="submit" class="btn w-full">Login</button>
+    <button class="btn btn-outline w-full">Login with Google</button>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `card` class to the surface and compose the sections inside.
+
+| Class              | Description                                                       |
+| ------------------ | ----------------------------------------------------------------- |
+| `card`             | Add to the surface; spacing derives from `--card-spacing`         |
+| `card-sm`          | Add to `card` for compact spacing and a smaller title             |
+| `card-header`      | Add to the top section holding title, description, and action     |
+| `card-title`       | Add to a heading element                                          |
+| `card-description` | Add to a paragraph with supporting text                           |
+| `card-action`      | Add to an element in the header to pin it to the top-right corner |
+| `card-content`     | Add to the main section                                           |
+| `card-footer`      | Add to the bottom section, a horizontal row by default            |
+
+```html
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Card Title</h3>
+    <p class="card-description">Card Description</p>
+    <div class="card-action">Card Action</div>
+  </div>
+  <div class="card-content">Card Content</div>
+  <div class="card-footer">Card Footer</div>
+</div>
+```
+
+## Examples
+
+### Size
+
+Add `card-sm` for a more compact card: the spacing tightens and the title drops a step.
+
+```html preview preset=form
+<div class="card card-sm mx-auto w-full max-w-xs">
+  <div class="card-header">
+    <h3 class="card-title">Scheduled reports</h3>
+    <p class="card-description">Weekly snapshots. No manual exports.</p>
+  </div>
+  <div class="card-content">
+    <ul class="grid gap-2 py-2 text-sm">
+      <li class="flex gap-2">
+        <svg class="mt-0.5 size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        <span>Choose a schedule (daily, or weekly).</span>
+      </li>
+      <li class="flex gap-2">
+        <svg class="mt-0.5 size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        <span>Send to channels or specific teammates.</span>
+      </li>
+      <li class="flex gap-2">
+        <svg class="mt-0.5 size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        <span>Include charts, tables, and key metrics.</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card-footer flex-col gap-2">
+    <button class="btn btn-sm w-full">Set up scheduled reports</button>
+    <button class="btn btn-outline btn-sm w-full">See what's new</button>
+  </div>
+</div>
+```
+
+### Spacing
+
+Set `--card-spacing` to control the section gaps and edge insets in one place.
+
+```html preview preset=form
+<div class="btn-group mx-auto" role="group" aria-label="Card spacing">
+  <button
+    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+    data-spacing="4"
+    aria-pressed="false"
+  >
+    16px
+  </button>
+  <button
+    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+    data-spacing="5"
+    aria-pressed="false"
+  >
+    20px
+  </button>
+  <button
+    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+    data-spacing="6"
+    aria-pressed="true"
+  >
+    24px
+  </button>
+  <button
+    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+    data-spacing="8"
+    aria-pressed="false"
+  >
+    32px
+  </button>
+</div>
+
+<div class="card" id="card-spacing-demo">
+  <div class="card-header">
+    <h3 class="card-title">Login to your account</h3>
+    <p class="card-description">
+      Enter your email below to login to your account
+    </p>
+    <div class="card-action">
+      <button class="btn btn-link">Sign Up</button>
+    </div>
+  </div>
+  <div class="card-content">
+    <form class="flex flex-col gap-6">
+      <div class="field">
+        <label class="label" for="card-spacing-email">Email</label>
+        <input
+          class="input"
+          id="card-spacing-email"
+          type="email"
+          placeholder="m@example.com"
+          required
+        />
+      </div>
+      <div class="field">
+        <div class="flex w-full items-center">
+          <label class="label" for="card-spacing-password">Password</label>
+          <a
+            href="#"
+            class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+          >
+            Forgot your password?
+          </a>
+        </div>
+        <input
+          class="input"
+          id="card-spacing-password"
+          type="password"
+          required
+        />
+      </div>
+    </form>
+  </div>
+  <div class="card-footer flex-col gap-2">
+    <button type="submit" class="btn w-full">Login</button>
+    <button class="btn btn-outline w-full">Login with Google</button>
+  </div>
+</div>
+
+<script>
+  const card = document.getElementById("card-spacing-demo");
+const buttons = document.querySelectorAll("[data-spacing]");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    buttons.forEach((b) =>
+      b.setAttribute("aria-pressed", String(b === button)));
+    card.style.setProperty(
+      "--card-spacing",
+      `calc(var(--spacing) * ${button.dataset.spacing})`,
+    );
+  });
+});
+</script>
+```
+
+### Edge to edge
+
+Use negative margins with `-mx-(--card-spacing)` to run content to the card edges while keeping it aligned with the inset.
+
+```html preview preset=form
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Terms of Service</h3>
+    <p class="card-description">
+      Review the terms before accepting the agreement.
+    </p>
+  </div>
+  <div class="card-content">
+    <div
+      class="-mx-(--card-spacing) max-h-48 space-y-4 overflow-y-scroll border-y bg-muted/50 px-(--card-spacing) py-4 text-sm leading-relaxed"
+    >
+      <p>
+        These terms govern your use of the workspace, including access to shared
+        documents, project files, and collaboration tools.
+      </p>
+      <p>
+        You are responsible for the content you upload and for ensuring that
+        your team has the appropriate permissions to view or edit it.
+      </p>
+      <p>
+        We may update features or limits as the service evolves. When those
+        changes materially affect your workflow, we will notify your workspace
+        administrators.
+      </p>
+      <p>
+        By continuing, you agree to keep your account credentials secure and to
+        follow your organization's acceptable use policies.
+      </p>
+    </div>
+  </div>
+  <div class="card-footer justify-end gap-2">
+    <button class="btn btn-outline">Decline</button>
+    <button class="btn">Accept</button>
+  </div>
+</div>
+```
+
+### Image
+
+Add an image before the card header to create a card with an image.
+
+```html preview preset=form
+<div class="card relative pt-0">
+  <div class="absolute inset-0 z-30 aspect-video bg-black/35"></div>
+  <img
+    src="https://avatar.vercel.sh/shadcn1"
+    alt="Event cover"
+    class="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+  />
+  <div class="card-header">
+    <div class="card-action">
+      <span class="badge badge-secondary">Featured</span>
+    </div>
+    <h3 class="card-title">Design systems meetup</h3>
+    <p class="card-description">
+      A practical talk on component APIs, accessibility, and shipping faster.
+    </p>
+  </div>
+  <div class="card-footer">
+    <button class="btn w-full">View Event</button>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Use logical utilities like `ms-auto` so alignment follows the text direction. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="card-rtl-demo" dir="rtl">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title" data-i18n="title">تسجيل الدخول إلى حسابك</h3>
+      <p class="card-description" data-i18n="description">أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك</p>
+      <div class="card-action">
+        <button class="btn btn-link" data-i18n="signUp">إنشاء حساب</button>
+      </div>
+    </div>
+    <div class="card-content">
+      <form class="flex flex-col gap-6">
+        <div class="field">
+          <label class="label" for="card-rtl-email" data-i18n="email">البريد الإلكتروني</label>
+          <input class="input" id="card-rtl-email" type="email" placeholder="m@example.com" required />
+        </div>
+        <div class="field">
+          <div class="flex w-full items-center">
+            <label class="label" for="card-rtl-password" data-i18n="password">كلمة المرور</label>
+            <a href="#" class="ms-auto inline-block text-sm underline-offset-4 hover:underline" data-i18n="forgotPassword">نسيت كلمة المرور؟</a>
+          </div>
+          <input class="input" id="card-rtl-password" type="password" required />
+        </div>
+      </form>
+    </div>
+    <div class="card-footer flex-col gap-2">
+      <button type="submit" class="btn w-full" data-i18n="login">تسجيل الدخول</button>
+      <button class="btn btn-outline w-full" data-i18n="loginWithGoogle">تسجيل الدخول باستخدام Google</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", title: "تسجيل الدخول إلى حسابك", description: "أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك", signUp: "إنشاء حساب", email: "البريد الإلكتروني", password: "كلمة المرور", forgotPassword: "نسيت كلمة المرور؟", login: "تسجيل الدخول", loginWithGoogle: "تسجيل الدخول باستخدام Google" },
+    he: { dir: "rtl", title: "התחבר לחשבון שלך", description: "הזן את האימייל שלך למטה כדי להתחבר לחשבון שלך", signUp: "הירשם", email: "אימייל", password: "סיסמה", forgotPassword: "שכחת את הסיסמה?", login: "התחבר", loginWithGoogle: "התחבר עם Google" },
+    en: { dir: "ltr", title: "Login to your account", description: "Enter your email below to login to your account", signUp: "Sign Up", email: "Email", password: "Password", forgotPassword: "Forgot your password?", login: "Login", loginWithGoogle: "Login with Google" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("card-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
+## CSS variables
+
+The card's spacing rhythm is one component-local variable: the card derives its vertical padding and section gap from it, and each section its horizontal inset. Override it per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+
+| Variable         | Default                          | Description                                         |
+| ---------------- | -------------------------------- | --------------------------------------------------- |
+| `--card-spacing` | `1.5rem` (`1rem` with `card-sm`) | Padding and gap rhythm of the card and its sections |
+
+```html
+<div class="card [--card-spacing:--spacing(8)]"></div>
+```

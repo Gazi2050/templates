@@ -1,0 +1,296 @@
+---
+title: Tabs
+description: A tabs component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show one section at a time behind a row of tabs, like the pages of a settings screen.
+---
+
+The tabs show one section at a time behind a row of tabs, like the pages of a settings screen. For content that should stay visible and stack, use an [accordion](/components/accordion) instead.
+
+```html preview preset=form
+<div class="tabs">
+  <div class="tab-list">
+    <button class="tab active" data-sp-toggle="#tab-overview">Overview</button>
+    <button class="tab" data-sp-toggle="#tab-analytics">Analytics</button>
+    <button class="tab" data-sp-toggle="#tab-reports">Reports</button>
+    <button class="tab" data-sp-toggle="#tab-settings">Settings</button>
+  </div>
+  <div class="tab-content active" id="tab-overview">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Overview</h3>
+        <p class="card-description">
+          View your key metrics and recent project activity. Track progress
+          across all your active projects.
+        </p>
+      </div>
+      <div class="card-content text-sm text-muted-foreground">
+        You have 12 active projects and 3 pending tasks.
+      </div>
+    </div>
+  </div>
+  <div class="tab-content" id="tab-analytics">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Analytics</h3>
+        <p class="card-description">
+          Track performance and user engagement metrics. Monitor trends and
+          identify growth opportunities.
+        </p>
+      </div>
+      <div class="card-content text-sm text-muted-foreground">
+        Page views are up 25% compared to last month.
+      </div>
+    </div>
+  </div>
+  <div class="tab-content" id="tab-reports">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Reports</h3>
+        <p class="card-description">
+          Generate and download your detailed reports. Export data in multiple
+          formats for analysis.
+        </p>
+      </div>
+      <div class="card-content text-sm text-muted-foreground">
+        You have 5 reports ready and available to export.
+      </div>
+    </div>
+  </div>
+  <div class="tab-content" id="tab-settings">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Settings</h3>
+        <p class="card-description">
+          Manage your account preferences and options. Customize your experience
+          to fit your needs.
+        </p>
+      </div>
+      <div class="card-content text-sm text-muted-foreground">
+        Configure notifications, security, and themes.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+## Usage
+
+Add `tab-list` to the row of `tab` buttons and point each tab at its panel with `data-sp-toggle`; mark the initially selected pair with `active`. The optional `tabs` wrapper lays out the list and panels with consistent spacing.
+
+| Class           | Description                                               |
+| --------------- | --------------------------------------------------------- |
+| `tabs`          | Add to an optional wrapper laying out the list and panels |
+| `tabs-vertical` | Add to `tabs` to put the list beside the panels           |
+| `tab-list`      | Add to the element holding the tabs                       |
+| `tab-list-line` | Add to `tab-list` for the underline variant               |
+| `tab`           | Add to each `<button>`; `active` marks the selected one   |
+| `tab-content`   | Add to each panel; `active` marks the visible one         |
+
+```html
+<div class="tabs">
+  <div class="tab-list">
+    <button class="tab active" data-sp-toggle="#panel-one">One</button>
+    <button class="tab" data-sp-toggle="#panel-two">Two</button>
+  </div>
+  <div class="tab-content active" id="panel-one">First panel</div>
+  <div class="tab-content" id="panel-two">Second panel</div>
+</div>
+```
+
+## Examples
+
+### Line
+
+Add `tab-list-line` for transparent tabs with an underline marking the selection.
+
+```html preview
+<div class="tab-list tab-list-line">
+  <button class="tab active">Overview</button>
+  <button class="tab">Analytics</button>
+  <button class="tab">Reports</button>
+</div>
+```
+
+### Vertical
+
+Add `tabs-vertical` to the wrapper and `data-sp-orientation="vertical"` to the list so the arrow keys follow.
+
+```html preview
+<div class="tabs tabs-vertical">
+  <div class="tab-list" data-sp-orientation="vertical">
+    <button class="tab active">Account</button>
+    <button class="tab">Password</button>
+    <button class="tab">Notifications</button>
+  </div>
+</div>
+```
+
+### Disabled
+
+Add `disabled` to a tab and both clicks and arrow navigation skip it.
+
+```html preview
+<div class="tab-list">
+  <button class="tab active">Home</button>
+  <button class="tab" disabled>Disabled</button>
+</div>
+```
+
+### Icons
+
+Tabs fit a leading icon; add `icon-start` to it for the correct spacing.
+
+```html preview
+<div class="tab-list">
+  <button class="tab active">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></svg>
+    Preview
+  </button>
+  <button class="tab">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
+    Code
+  </button>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="tabs-rtl-demo" class="tabs w-full max-w-md" dir="rtl">
+  <div class="tab-list">
+    <button class="tab active" data-sp-toggle="#tabs-rtl-overview" data-i18n="overview">نظرة عامة</button>
+    <button class="tab" data-sp-toggle="#tabs-rtl-analytics" data-i18n="analytics">التحليلات</button>
+    <button class="tab" data-sp-toggle="#tabs-rtl-settings" data-i18n="settings">الإعدادات</button>
+  </div>
+  <div class="tab-content active" id="tabs-rtl-overview">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title" data-i18n="overviewTitle">نظرة عامة</h3>
+        <p class="card-description" data-i18n="overviewDesc">عرض مقاييسك الرئيسية وأنشطة المشروع الأخيرة. تتبع التقدم عبر جميع مشاريعك النشطة.</p>
+      </div>
+      <div class="card-content text-sm text-muted-foreground" data-i18n="overviewContent">
+        لديك ١٢ مشروعًا نشطًا و٣ مهام معلقة.
+      </div>
+    </div>
+  </div>
+  <div class="tab-content" id="tabs-rtl-analytics">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title" data-i18n="analyticsTitle">التحليلات</h3>
+        <p class="card-description" data-i18n="analyticsDesc">تتبع مقاييس الأداء ومشاركة المستخدمين. راقب الاتجاهات وحدد فرص النمو.</p>
+      </div>
+      <div class="card-content text-sm text-muted-foreground" data-i18n="analyticsContent">
+        زادت مشاهدات الصفحة بنسبة ٢٥٪ مقارنة بالشهر الماضي.
+      </div>
+    </div>
+  </div>
+  <div class="tab-content" id="tabs-rtl-settings">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title" data-i18n="settingsTitle">الإعدادات</h3>
+        <p class="card-description" data-i18n="settingsDesc">إدارة تفضيلات حسابك وخياراته. تخصيص تجربتك لتناسب احتياجاتك.</p>
+      </div>
+      <div class="card-content text-sm text-muted-foreground" data-i18n="settingsContent">
+        تكوين الإشعارات والأمان والسمات.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: {
+      dir: "rtl",
+      overview: "نظرة عامة", analytics: "التحليلات", settings: "الإعدادات",
+      overviewTitle: "نظرة عامة",
+      overviewDesc: "عرض مقاييسك الرئيسية وأنشطة المشروع الأخيرة. تتبع التقدم عبر جميع مشاريعك النشطة.",
+      overviewContent: "لديك ١٢ مشروعًا نشطًا و٣ مهام معلقة.",
+      analyticsTitle: "التحليلات",
+      analyticsDesc: "تتبع مقاييس الأداء ومشاركة المستخدمين. راقب الاتجاهات وحدد فرص النمو.",
+      analyticsContent: "زادت مشاهدات الصفحة بنسبة ٢٥٪ مقارنة بالشهر الماضي.",
+      settingsTitle: "الإعدادات",
+      settingsDesc: "إدارة تفضيلات حسابك وخياراته. تخصيص تجربتك لتناسب احتياجاتك.",
+      settingsContent: "تكوين الإشعارات والأمان والسمات.",
+    },
+    he: {
+      dir: "rtl",
+      overview: "סקירה כללית", analytics: "אנליטיקה", settings: "הגדרות",
+      overviewTitle: "סקירה כללית",
+      overviewDesc: "הצג את המדדים העיקריים שלך ופעילות הפרויקט האחרונה. עקוב אחר התקדמות בכל הפרויקטים הפעילים שלך.",
+      overviewContent: "יש לך 12 פרויקטים פעילים ו-3 משימות ממתינות.",
+      analyticsTitle: "אנליטיקה",
+      analyticsDesc: "עקוב אחר ביצועים ומדדי מעורבות משתמשים. עקוב אחר מגמות וזהה הזדמנויות צמיחה.",
+      analyticsContent: "צפיות בדף עלו ב-25% בהשוואה לחודש שעבר.",
+      settingsTitle: "הגדרות",
+      settingsDesc: "נהל את העדפות החשבון והאפשרויות שלך. התאם אישית את החוויה שלך כך שתתאים לצרכים שלך.",
+      settingsContent: "הגדר התראות, אבטחה וערכות נושא.",
+    },
+    en: {
+      dir: "ltr",
+      overview: "Overview", analytics: "Analytics", settings: "Settings",
+      overviewTitle: "Overview",
+      overviewDesc: "View your key metrics and recent project activity. Track progress across all your active projects.",
+      overviewContent: "You have 12 active projects and 3 pending tasks.",
+      analyticsTitle: "Analytics",
+      analyticsDesc: "Track performance and user engagement metrics. Monitor trends and identify growth opportunities.",
+      analyticsContent: "Page views are up 25% compared to last month.",
+      settingsTitle: "Settings",
+      settingsDesc: "Manage your account preferences and options. Customize your experience to fit your needs.",
+      settingsContent: "Configure notifications, security, and themes.",
+    },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("tabs-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
+## Options
+
+### Tab list
+
+Set each option with its own `data-sp-*` attribute on the `tab-list` element.
+
+| Attribute             | Values                     | Default      |
+| --------------------- | -------------------------- | ------------ |
+| `data-sp-item`        | CSS selector               | `.tab`       |
+| `data-sp-orientation` | `horizontal` \| `vertical` | `horizontal` |
+
+Each `tab` points at its panel with its own `data-sp-toggle` attribute.
+
+## JavaScript
+
+### Events
+
+Events fire on the `tab-list` element; `sp-beforechange` is cancelable and both carry the tab in `detail.tab`.
+
+| Event             | When                              |
+| ----------------- | --------------------------------- |
+| `sp-beforechange` | Before switching (cancelable)     |
+| `sp-change`       | A tab and its panel were selected |
+
+```js
+list.addEventListener("sp-beforechange", (e) => {
+  if (unsavedChanges) e.preventDefault(); // veto the switch
+});
+```
+
+### Methods
+
+Get the instance with `sp.tabs(el)`, then call its methods:
+
+| Method        | Description                  |
+| ------------- | ---------------------------- |
+| `select(tab)` | Select the given tab element |
+
+```js
+const tabs = sp.tabs(document.querySelector(".tab-list"));
+
+tabs.select(document.querySelector("#my-tab"));
+```

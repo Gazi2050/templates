@@ -1,0 +1,24 @@
+{
+  "name": "starting-point-ui-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "check-types": "turbo run check-types",
+    "format": "prettier --write \"**/*.{ts,tsx,md,mdx}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.7.4",
+    "prettier-plugin-svg-oneline": "*",
+    "turbo": "^2.8.13"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "npm@10.9.2",
+  "engines": {
+    "node": ">=18"
+  }
+}
