@@ -1,4 +1,5 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { ChartTooltip } from './chart-tooltip'
 
 const data = [
   {
@@ -69,6 +70,14 @@ export function Overview() {
           tickLine={false}
           axisLine={false}
           tickFormatter={(value) => `$${value}`}
+        />
+        <Tooltip
+          cursor={{ fill: 'var(--muted)' }}
+          content={
+            <ChartTooltip
+              valueFormatter={(value) => `$${value.toLocaleString()}`}
+            />
+          }
         />
         <Bar
           dataKey='total'

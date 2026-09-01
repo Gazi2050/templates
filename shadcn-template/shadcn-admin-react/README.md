@@ -1,119 +1,69 @@
-# Shadcn Admin Dashboard
+# Admin Dashboard
 
-Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
+React admin dashboard template — Vite + TanStack Router/Query + shadcn/ui (Tailwind v4), themed with the EduOS design system (gold accent on dark surfaces).
 
-![alt text](public/images/shadcn-admin.png)
-
-[![Sponsored by Clerk](https://img.shields.io/badge/Sponsored%20by-Clerk-5b6ee1?logo=clerk)](https://go.clerk.com/GttUAaK)
-
-I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
-
-> This is not a starter project (template) though. I'll probably make one in the future.
-
-## Features
-
-- Light/dark mode
-- Responsive
-- Accessible
-- With built-in Sidebar component
-- Global search command
-- 10+ pages
-- Extra custom components
-- RTL support
-
-<details>
-<summary>Customized Components (click to expand)</summary>
-
-This project uses Shadcn UI components, but some have been slightly modified for better RTL (Right-to-Left) support and other improvements. These customized components differ from the original Shadcn UI versions.
-
-If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest add <component>`), it's generally safe for non-customized components. For the listed customized ones, you may need to manually merge changes to preserve the project's modifications and avoid overwriting RTL support or other updates.
-
-> If you don't require RTL support, you can safely update the 'RTL Updated Components' via the Shadcn CLI, as these changes are primarily for RTL compatibility. The 'Modified Components' may have other customizations to consider.
-
-### Modified Components
-
-- scroll-area
-- sonner
-- separator
-
-### RTL Updated Components
-
-- alert-dialog
-- calendar
-- command
-- dialog
-- dropdown-menu
-- select
-- table
-- sheet
-- sidebar
-- switch
-
-**Notes:**
-
-- **Modified Components**: These have general updates, potentially including RTL adjustments.
-- **RTL Updated Components**: These have specific changes for RTL language support (e.g., layout, positioning).
-- For implementation details, check the source files in `src/components/ui/`.
-- All other Shadcn UI components in the project are standard and can be safely updated via the CLI.
-
-</details>
-
-## Tech Stack
-
-**UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
-
-**Build Tool:** [Vite](https://vitejs.dev/)
-
-**Routing:** [TanStack Router](https://tanstack.com/router/latest)
-
-**Type Checking:** [TypeScript](https://www.typescriptlang.org/)
-
-**Linting/Formatting:** [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
-
-**Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
-
-**Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
-
-## Run Locally
-
-Clone the project
+## Getting Started
 
 ```bash
-  git clone https://github.com/satnaing/shadcn-admin.git
+pnpm install
+pnpm run dev        # start dev server (http://localhost:5173)
 ```
 
-Go to the project directory
+## Scripts
 
-```bash
-  cd shadcn-admin
+| Command                  | What it does                       |
+| ------------------------ | ---------------------------------- |
+| `pnpm run dev`           | Dev server with HMR                |
+| `pnpm run build`         | Type-check + production build      |
+| `pnpm run preview`       | Preview the production build       |
+| `pnpm run lint`          | ESLint                             |
+| `pnpm run format`        | Prettier (write)                   |
+| `pnpm run format:check`  | Prettier (check)                   |
+| `pnpm run knip`          | Find unused files/exports          |
+| `pnpm run test`          | Vitest (headless browser)          |
+| `pnpm run test:watch`    | Vitest in watch mode               |
+| `pnpm run test:coverage` | Vitest with coverage               |
+
+Browser tests need Chromium once: `pnpm run test:browser:install`.
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── ui/         # shadcn/ui primitives (do not edit lightly)
+│   ├── layout/     # sidebar, header, nav, authenticated layout
+│   └── data-table/ # reusable table pieces (pagination, filters, columns)
+├── features/       # page-level feature modules (dashboard, users, tasks, ...)
+├── routes/         # TanStack Router file routes
+├── stores/         # Zustand stores
+├── context/        # React context providers
+├── hooks/          # shared hooks
+├── lib/            # utilities
+├── config/         # app config (fonts, env)
+├── styles/         # index.css + theme.css (design tokens)
+└── test-utils/     # test helpers
 ```
 
-Install dependencies
+## Theming
 
-```bash
-  pnpm install
-```
+All design tokens live in `src/styles/theme.css`:
 
-Start the server
+- Semantic tokens — `--background`, `--primary`, `--muted`, `--border`, `--sidebar-*`, etc. (light `:root` + `.dark`)
+- Primitive scales — `--primary-50…900`, `--secondary-*`, `--tertiary-*`, `--neutral-*` → usable as `bg-primary-500`, `text-neutral-400`, ...
+- Feedback — `--success`, `--warning`, `--info`
+- Borders — `--border-subtle`, `--border-strong`, `--border-accent`
+- Radius + letter-spacing tokens
 
-```bash
-  pnpm run dev
-```
+Prefer semantic Tailwind classes (`bg-primary`, `text-muted-foreground`) over raw hex values. Dark mode is class-based (`.dark` on `html`).
 
-## Sponsoring this project ❤️
+## Adding a Page
 
-If you find this project helpful or use this in your own work, consider [sponsoring me](https://github.com/sponsors/satnaing) to support development and maintenance. You can [buy me a coffee](https://buymeacoffee.com/satnaing) as well. Don’t worry, every penny helps. Thank you! 🙏
+1. Create the route file under `src/routes/` (TanStack Router file-based routing, `routeTree.gen.ts` is generated).
+2. Build the feature under `src/features/<name>/`.
+3. Add nav entries in `src/components/layout/data/sidebar-data.ts`.
 
-For questions or sponsorship inquiries, feel free to reach out at [satnaingdev@gmail.com](mailto:satnaingdev@gmail.com).
+## Notes
 
-### Current Sponsor
-
-- [Clerk](https://go.clerk.com/GttUAaK) - authentication and user management for the modern web
-
-## Author
-
-Crafted with 🤍 by [@satnaing](https://github.com/satnaing)
-
-## License
-
-Licensed under the [MIT License](https://choosealicense.com/licenses/mit/)
+- `src/components/ui/` holds customized shadcn components (RTL + tweaks) — merge manually when updating via shadcn CLI.
+- Fonts are loaded in `index.html` (Inter, Manrope). Set via `--font-inter` / `--font-manrope` / `--font-mono` tokens.
