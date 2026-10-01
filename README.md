@@ -19,14 +19,18 @@ A collection of production-ready starter templates: a Next.js admin dashboard an
 
 Uses [degit](https://github.com/Rich-Harris/degit) — copies the template without git history (no git binary needed; the repo must be public, or degit falls back to git):
 
+### Next.js admin dashboard
+
 ```bash
-# Next.js admin dashboard
 npx degit Gazi2050/templates/next-admin my-dashboard
 cd my-dashboard
 pnpm install
 pnpm run dev          # → http://localhost:3000
+```
 
-# Expo mobile app
+### Expo mobile app
+
+```bash
 npx degit Gazi2050/templates/rn-app my-mobile-app
 cd my-mobile-app
 pnpm install
