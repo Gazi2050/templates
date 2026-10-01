@@ -1,6 +1,6 @@
 # next-admin — Project Overview
 
-A responsive admin dashboard starter built with **Next.js 16 (App Router)**, **React 19**, **TypeScript (strict)**, **Tailwind CSS v4**, and **shadcn/ui** on the `base-nova` style (**Base UI** primitives). State is managed with **Zustand**, validation with **Zod**, forms with **React Hook Form**, and the codebase is linted/formatted by **Biome** with **Husky + lint-staged** on pre-commit.
+A responsive admin dashboard starter built with **Next.js 16 (App Router)**, **React 19**, **TypeScript (strict)**, **Tailwind CSS v4**, and **shadcn/ui** on the `base-nova` style (**Base UI** primitives). State is managed with **Zustand**, validation with **Zod**, forms with **React Hook Form**, and the codebase is linted and formatted by **Biome**.
 
 This document is the full feature, component, and capability reference. For day-to-day agent rules, read [`AGENTS.md`](../AGENTS.md).
 
@@ -20,8 +20,8 @@ This document is the full feature, component, and capability reference. For day-
 | Charts | Recharts 3 |
 | Calendar | FullCalendar 7 (`@fullcalendar/react`) + shared views in `src/components/calendar/` |
 | Drag & drop | `@dnd-kit/react` + `@dnd-kit/helpers` + `@dnd-kit/abstract` |
-| Misc | `cmdk` (command palette), `embla-carousel-react`, `input-otp`, `react-day-picker`, `react-resizable-panels`, `simple-icons` (brand icons), `d3-geo` + `topojson-client` (map), `temporal-polyfill` (dates) |
-| Tooling | Biome 2 (lint/format/organize imports), Husky, lint-staged, ts-node (preset generation) |
+| Misc | `date-fns` (date utilities), `cmdk` (command palette), `react-day-picker`, `react-resizable-panels`, `simple-icons` (brand icons), `d3-geo` + `topojson-client` (map) |
+| Tooling | Biome 2 (lint + format + organize imports), pnpm |
 
 Package manager: **pnpm** (see `pnpm-lock.yaml`). There is no test runner configured.
 
@@ -39,7 +39,7 @@ src/app/
 └── (main)/                         # main shell
     ├── dashboard/
     │   ├── layout.tsx              # dashboard shell: SidebarProvider + AppSidebar + header
-    │   ├── page.tsx                # redirect → /dashboard/default
+    │   ├── page.tsx                # redirect → /dashboard/default (next.config.mjs redirects() covers it first; this page is the fallback)
     │   ├── [...not-found]/page.tsx # dashboard-scoped 404 catch-all
     │   ├── <screen>/page.tsx       # one folder per dashboard screen (19 screens)
     │   ├── <screen>/_components/   # screen-specific components + mock data (data.ts)
@@ -90,7 +90,7 @@ NavSubItem      { id, title, url, icon?, badge?, disabled?, newTab? }
 1. Top-level links: **Default** (`/dashboard/default`), **Chat** (`/dashboard/chat`), **Email** (`/dashboard/mail`), **Tasks**, **Kanban**, **Users**, **Roles**, **Invoice**
 2. **Pages** parent item whose `subItems` cover everything else: CRM, Finance, Analytics, Productivity, E-commerce, Academy, Logistics, Infrastructure, File Manager (`new`), Patient Monitoring (`new`), Calendar, Coming Soon (`soon`, disabled), the four Legacy V1 screens, and the four auth screens (Login/Register V1/V2, `newTab`).
 
-**Rendering:** `src/app/(main)/dashboard/_components/sidebar/nav-main.tsx` picks one of three renderers per item — plain link, `Collapsible` (expanded parent on desktop/mobile), or `DropdownMenu` (parent while the sidebar is icon-collapsed). Active state derives from `usePathname`. The sidebar footer contains nothing (the account menu lives in the navbar's `AccountSwitcher`).
+**Rendering:** `src/app/(main)/dashboard/_components/sidebar/nav-main.tsx` picks one of three renderers per item — plain link, `Collapsible` (expanded parent on desktop/mobile), or `DropdownMenu` (parent while the sidebar is icon-collapsed). Active state derives from `usePathname`. Parent items latch their initial expanded state from the route in a `useState` initializer — `defaultOpen` is intentionally **not** route-reactive (Base UI ignores post-init `default*` changes on uncontrolled components and logs a warning). The sidebar footer contains nothing (the account menu lives in the navbar's `AccountSwitcher`).
 
 **Search:** `src/app/(main)/dashboard/_components/header/search-dialog.tsx` derives its command-palette index by flattening `sidebarItems` — new nav entries appear in ⌘K search automatically.
 
@@ -127,7 +127,7 @@ PREFERENCE_REGISTRY = {
 
 ## Fonts
 
-`src/lib/fonts/registry.ts` defines 13 fonts as `next/font` instances (Geist, Inter, DM Sans, Public Sans, Outfit, Geist Mono, Geist Pixel Square, JetBrains Mono, Noto Serif, Roboto Slab, Merriweather, Lora, Playfair Display). Each entry exposes `label` + `font`; the registry derives:
+`src/lib/fonts/registry.ts` defines 18 fonts as `next/font` instances (Geist, Inter, Noto Sans, Nunito Sans, Figtree, Roboto, Raleway, DM Sans, Public Sans, Outfit, Geist Mono, Geist Pixel Square, JetBrains Mono, Noto Serif, Roboto Slab, Merriweather, Lora, Playfair Display). Each entry exposes `label` + `font`; the registry derives:
 
 - `fontKeys` — allowed values for the `font` preference
 - `fontOptions` — `{ key, label }` for the picker UI
@@ -141,7 +141,7 @@ Presets are pure CSS token sets, generated into typed options:
 
 - `src/app/globals.css` — hosts the **default** preset tokens.
 - `src/styles/presets/{brutalist,tangerine,soft-pop}.css` — additional presets, selected via `data-theme-preset`.
-- `src/lib/preferences/theme.ts` contains a generated `THEME_PRESET_OPTIONS` block (labels + primary color swatches for light/dark) — regenerate with `pnpm run generate:presets` (`src/scripts/generate-theme-presets.ts`) after adding a preset CSS file. Don't hand-edit the generated block.
+- `src/lib/preferences/theme.ts` contains a generated `THEME_PRESET_OPTIONS` block (labels + primary color swatches for light/dark) — checked-in generated content, do not hand-edit (the generator was removed in the cleanup; recover from git history if a new preset is ever added).
 - `THEME_MODE` handling (light/dark/system resolution, `disable-transitions` guard, system subscription) lives in `src/lib/preferences/theme-utils.ts`.
 
 ---
@@ -190,11 +190,9 @@ pnpm install               # install (pnpm; lockfile: pnpm-lock.yaml)
 pnpm run dev               # dev server → http://localhost:3000
 pnpm run build             # production build
 pnpm run start             # production server
-pnpm run lint              # biome lint
-pnpm run format            # biome format --write
 pnpm run check             # biome check (lint + format + organize imports)
 pnpm run check:fix         # biome check --write
-pnpm run generate:presets  # regenerate THEME_PRESET_OPTIONS from styles/presets
+pnpm run typecheck         # tsc --noEmit
 ```
 
 There is no automated test command. Run build/lint/check only when explicitly requested.
@@ -209,3 +207,14 @@ There is no automated test command. Run build/lint/check only when explicitly re
 4. Register it in `src/navigation/sidebar/sidebar-items.ts` (top-level link or `Pages` sub-item).
 5. Use semantic theme tokens; match nearby screens in density, radius, and spacing; handle loading/empty/error/disabled/overflow states; keep it accessible (semantic HTML, focus states, labels, ARIA).
 6. Verify in light + dark, with the sidebar in all three variants and both collapse modes.
+
+---
+
+## Removed in cleanup (2026-10)
+
+Deleted as provably unreferenced (full import-graph scan); recover any of it from git history if needed:
+
+- **UI primitives** (`src/components/ui/`): accordion, alert-dialog, aspect-ratio, attachment, breadcrumb, carousel, combobox, context-menu, direction, hover-card, input-otp, menubar, native-select, navigation-menu, questionnaire, radio-group, slider, spinner, switch
+- **Files:** `src/proxy.disabled.ts` (inert scaffold), `src/scripts/generate-theme-presets.ts` + `tsconfig.scripts.json` (preset generator; its typed output in `src/lib/preferences/theme.ts` stays)
+- **Dependencies:** `husky`, `lint-staged`, `ts-node`, `temporal-polyfill` (direct dep only — FullCalendar still pulls it transitively), `embla-carousel-react`, `input-otp` (orphaned by the `carousel`/`input-otp` primitive deletions)
+- **Scripts:** `lint`, `format` (covered by `check`), `prepare`, `generate:presets`; plus the `lint-staged` config block. Remaining: `dev`, `build`, `start`, `check`, `check:fix`, `typecheck`.

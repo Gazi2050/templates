@@ -28,14 +28,12 @@ pnpm run dev
 Available commands:
 
 ```bash
-pnpm run dev               # start the dev server (http://localhost:3000)
-pnpm run build             # production build
-pnpm run start             # start the production server
-pnpm run lint              # biome lint
-pnpm run format            # biome format --write
-pnpm run check             # biome check (lint + format + import sorting)
-pnpm run check:fix         # biome check --write
-pnpm run generate:presets  # regenerate theme preset options (ts-node)
+pnpm run dev        # start the dev server (http://localhost:3000)
+pnpm run build      # production build
+pnpm run start      # start the production server
+pnpm run check      # biome check (lint + format + import sorting)
+pnpm run check:fix  # biome check --write
+pnpm run typecheck  # tsc --noEmit
 ```
 
 There is currently no automated test command. Run build, lint, check, or other validation commands only when the user explicitly requests that validation.
@@ -72,14 +70,14 @@ src/
 ├── hooks/                            # use-mobile, use-lg
 ├── lib/
 │   ├── preferences/                  # preference registry, defaults, theme logic & boot helpers
-│   ├── fonts/                        # next/font registry (13 fonts; default: Inter)
+│   ├── fonts/                        # next/font registry (18 fonts; default: Inter)
 │   ├── local-storage.client.ts       # client localStorage helper
 │   ├── cookie.client.ts              # client cookie helper
 │   ├── data-table-features.ts
 │   └── utils.ts                      # cn() + helpers (shared, cross-cutting only)
 ├── navigation/
 │   └── sidebar/sidebar-items.ts      # sidebar nav definition (groups, items, sub-items)
-├── scripts/                          # generate-theme-presets.ts, theme-boot.tsx
+├── scripts/                          # theme-boot.tsx (pre-hydration preference boot script)
 ├── server/
 │   └── server-actions.ts             # "use server": getPreference / getValueFromCookie / setValueToCookie
 ├── stores/
@@ -93,7 +91,7 @@ src/
 
 ### Navigation (`src/navigation/sidebar/sidebar-items.ts`)
 
-The sidebar is config-driven. `sidebarItems` is a `NavGroup[]` array; the current nav has a single group with top-level items **Default, Chat, Email, Tasks, Kanban, Users, Roles, Invoice** and a **Pages** parent item whose `subItems` cover the remaining screens (CRM, Finance, Analytics, Productivity, E-commerce, Academy, Logistics, Infrastructure, File Manager, Patient Monitoring, Calendar, Coming Soon), the legacy V1 variants, and the auth screens (Login/Register v1/v2). Parent items cannot nest further. Add new screens here when they should appear in the dashboard navigation; the ⌘K search dialog indexes this file automatically.
+The sidebar is config-driven. `sidebarItems` is a `NavGroup[]` array; the current nav has a single group with top-level items **Default, Chat, Email, Tasks, Kanban, Users, Roles, Invoice** and a **Pages** parent item whose `subItems` cover the remaining screens (CRM, Finance, Analytics, Productivity, E-commerce, Academy, Logistics, Infrastructure, File Manager, Patient Monitoring, Calendar, Coming Soon), the legacy V1 variants, and the auth screens (Login/Register v1/v2). Parent items cannot nest further. Add new screens here when they should appear in the dashboard navigation; the ⌘K search dialog indexes this file automatically. Parent items latch their initial expanded state from the route — do not make `defaultOpen` route-reactive (uncontrolled Collapsible; Base UI warns and ignores post-init changes).
 
 ### Preferences
 
@@ -101,7 +99,7 @@ Theme/layout preferences are registry-driven. Defaults (`theme_preset = "default
 
 ### Theme presets & fonts
 
-Presets are CSS token sets: the **Default** preset lives in `src/app/globals.css`; Brutalist, Soft Pop, and Tangerine live in `src/styles/presets/`. After adding a preset file, regenerate the typed options with `pnpm run generate:presets` (never hand-edit the generated block in `src/lib/preferences/theme.ts`). Fonts are `next/font` instances registered in `src/lib/fonts/registry.ts`; the registry exposes `fontKeys`, `fontOptions`, and `fontVars` (all variable classnames are applied to `<body>` once — switching fonts only flips the `data-font` attribute).
+Presets are CSS token sets: the **Default** preset lives in `src/app/globals.css`; Brutalist, Soft Pop, and Tangerine live in `src/styles/presets/`. The typed options block in `src/lib/preferences/theme.ts` is generated content — treat it as checked-in source and never hand-edit it (the generator script was removed in the cleanup; recover it from git history if a new preset is ever added). Fonts are `next/font` instances registered in `src/lib/fonts/registry.ts`; the registry exposes `fontKeys`, `fontOptions`, and `fontVars` (all variable classnames are applied to `<body>` once — switching fonts only flips the `data-font` attribute).
 
 ### App config (`src/config/app-config.ts`)
 

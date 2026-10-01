@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -236,11 +238,15 @@ function NavDropdownItem({ item, isActive, isSubItemActive }: NavDropdownItemPro
 
 function NavCollapsibleItem({ item, isActive, defaultOpen, isSubItemActive }: NavCollapsibleItemProps) {
   const Icon = item.icon;
+  // Latch the initial value: Collapsible is uncontrolled, so a changing defaultOpen prop is
+  // ignored by Base UI after initialization (and logs a warning). Route changes re-render
+  // this component with a new defaultOpen — latching keeps runtime behavior identical.
+  const [initialOpen] = useState(defaultOpen);
 
   return (
     <Collapsible
       render={<li data-slot="sidebar-menu-item" data-sidebar="menu-item" className="group/menu-item relative" />}
-      defaultOpen={defaultOpen}
+      defaultOpen={initialOpen}
       className="group/collapsible"
     >
       <CollapsibleTrigger
