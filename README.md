@@ -72,8 +72,3 @@ pnpm install
 ```bash
 pnpm run dev
 ```
-
-## Per-template docs
-
-- [`next-admin` overview](./next-admin/docs/project-overview.md)
-- [`rn-app` overview](./rn-app/docs/project-overview.md)
