@@ -55,7 +55,7 @@ function defineSSRPreference<
 export const PREFERENCE_REGISTRY = {
   theme_mode: definePreference({
     values: THEME_MODE_VALUES,
-    defaultValue: "light",
+    defaultValue: "system",
     persistence: "client-cookie",
     attribute: "data-theme-mode",
   }),
@@ -69,14 +69,14 @@ export const PREFERENCE_REGISTRY = {
 
   font: definePreference({
     values: fontKeys,
-    defaultValue: "geist",
+    defaultValue: "inter",
     persistence: "client-cookie",
     attribute: "data-font",
   }),
 
   content_layout: definePreference({
     values: CONTENT_LAYOUT_VALUES,
-    defaultValue: "centered",
+    defaultValue: "full-width",
     persistence: "client-cookie",
     attribute: "data-content-layout",
   }),
@@ -90,7 +90,7 @@ export const PREFERENCE_REGISTRY = {
 
   sidebar_variant: defineSSRPreference({
     values: SIDEBAR_VARIANT_VALUES,
-    defaultValue: "sidebar",
+    defaultValue: "inset",
     persistence: "client-cookie",
     attribute: "data-sidebar-variant",
   }),
