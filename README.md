@@ -1,6 +1,6 @@
 # Templates
 
-A collection of production-ready starter templates: a Next.js admin dashboard and an Expo mobile app.
+📦 Collection of production-ready starter templates. Degit, install, build.
 
 ## Requirements
 
@@ -17,7 +17,7 @@ A collection of production-ready starter templates: a Next.js admin dashboard an
 
 ## Scaffold a template
 
-Uses [degit](https://github.com/Rich-Harris/degit) — copies the template without git history (no git binary needed; the repo must be public, or degit falls back to git):
+Uses [degit](https://github.com/Rich-Harris/degit) — copies the template without git history (no git binary needed; the repo must be public, or degit falls back to git).
 
 ### Next.js admin dashboard
 
@@ -73,4 +73,7 @@ pnpm install
 pnpm run dev
 ```
 
-For per-template architecture, conventions, and build/deploy commands, read each template's README and `docs/project-overview.md`.
+## Per-template docs
+
+- [`next-admin` overview](./next-admin/docs/project-overview.md)
+- [`rn-app` overview](./rn-app/docs/project-overview.md)
