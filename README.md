@@ -23,25 +23,54 @@ Uses [degit](https://github.com/Rich-Harris/degit) — copies the template witho
 
 ```bash
 npx degit Gazi2050/templates/next-admin my-dashboard
+```
+
+```bash
 cd my-dashboard
+```
+
+```bash
 pnpm install
-pnpm run dev          # → http://localhost:3000
+```
+
+```bash
+pnpm run dev
 ```
 
 ### Expo mobile app
 
 ```bash
 npx degit Gazi2050/templates/rn-app my-mobile-app
+```
+
+```bash
 cd my-mobile-app
+```
+
+```bash
 pnpm install
-pnpm run dev          # → scan the QR with Expo Go, or press w for web
+```
+
+```bash
+pnpm run dev
 ```
 
 Prefer git? Clone the whole monorepo and work inside a subfolder:
 
 ```bash
 git clone https://github.com/Gazi2050/templates.git
-cd templates/next-admin && pnpm install && pnpm run dev
+```
+
+```bash
+cd templates/next-admin
+```
+
+```bash
+pnpm install
+```
+
+```bash
+pnpm run dev
 ```
 
 For per-template architecture, conventions, and build/deploy commands, read each template's README and `docs/project-overview.md`.
