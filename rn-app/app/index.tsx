@@ -26,14 +26,18 @@ export default function Index() {
       >
         <Text
           className={`font-headline text-headline ${
-            isDark ? "text-primitive-neutral-50" : "text-primitive-secondary-900"
+            isDark
+              ? "text-primitive-neutral-50"
+              : "text-primitive-secondary-900"
           }`}
         >
           Mobile app
         </Text>
         <Text
           className={`mt-3 font-body text-body ${
-            isDark ? "text-primitive-tertiary-200" : "text-primitive-secondary-500"
+            isDark
+              ? "text-primitive-tertiary-200"
+              : "text-primitive-secondary-500"
           }`}
         >
           Current mode: {isDark ? "dark" : "light"}
@@ -49,7 +53,9 @@ export default function Index() {
         >
           <Text
             className={`font-label text-label ${
-              isDark ? "text-primitive-secondary-900" : "text-primitive-neutral-50"
+              isDark
+                ? "text-primitive-secondary-900"
+                : "text-primitive-neutral-50"
             }`}
           >
             Toggle to {isDark ? "light" : "dark"}

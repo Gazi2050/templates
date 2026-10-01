@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 import { PortalHost } from "@rn-primitives/portal";
-import { ThemeProvider } from "@react-navigation/native";
+import { ThemeProvider } from "expo-router/react-navigation";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
 import { useEffect } from "react";
