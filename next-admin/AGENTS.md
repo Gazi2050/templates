@@ -113,15 +113,45 @@ Mock data lives beside the screens that use it (`<screen>/_components/data.ts`).
 
 Use the shadcn skill for all work involving shadcn/ui components, styling, composition, registries, presets, or `components.json`.
 
-If the skill is not available, install it with:
-
-```bash
-npx skills add shadcn/ui
-```
+This project ships the skill locally at `.agents/skills/shadcn/`.
 
 The skill contains the component, styling, composition, accessibility, and CLI rules. Do not duplicate those rules here. Always inspect the local component source before using it.
 
 Do not modify files inside `src/components/ui/` or `src/components/calendar/`. Keep these components intact and apply styling or customization where they are used.
+
+## Project skills
+
+Project-local agent skills live in `.agents/skills/`. Load the relevant one before starting related work. (The `shadcn` skill above covers shadcn/ui work.)
+
+**UI & design**
+
+- `tailwind-v4-shadcn` — Tailwind v4 + shadcn theming, CSS variables, dark mode, color problems
+- `tailwind-css-patterns` — responsive layout, spacing, typography, utility patterns
+- `frontend-design` — building new pages/components with high visual quality
+
+**Next.js & React**
+
+- `next-best-practices` — file conventions, RSC boundaries, data/async patterns
+- `next-cache-components` — Next.js 16 PPR, `use cache`, cacheLife/cacheTag
+- `next-upgrade` — upgrading Next.js versions
+- `react-best-practices` — React/Next.js performance patterns
+- `composition-patterns` — compound components, render props, context, flexible APIs
+
+**TypeScript & data**
+
+- `typescript-advanced-types` — generics, conditional/mapped types, type utilities
+- `zod` — schema validation (z.object, safeParse, z.infer)
+- `react-hook-form` — client-side forms (useForm/useWatch/useController/useFieldArray)
+
+**Quality**
+
+- `accessibility` — WCAG 2.2, a11y audits, keyboard/screen-reader support
+- `seo` — meta tags, structured data, sitemap
+
+**Backend**
+
+- `nodejs-backend-patterns` — Express/Fastify middleware, error handling, auth, API design
+- `nodejs-best-practices` — Node.js principles, async patterns, security, architecture
 
 ## Co-location-based structure
 
